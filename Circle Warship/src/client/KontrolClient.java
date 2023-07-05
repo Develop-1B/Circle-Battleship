@@ -1,0 +1,53 @@
+package client;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class KontrolClient implements KeyListener {
+    private MapClient mapPanel;
+    private EnemyMapClient enemyMap;
+
+    public KontrolClient(MapClient mapPanel, EnemyMapClient enemyMap) {
+        this.mapPanel = mapPanel;
+        this.enemyMap = enemyMap;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int key = e.getKeyCode();
+
+        if (mapPanel.getNumObjects() < 5) {
+            if (key == KeyEvent.VK_W) {
+                mapPanel.moveshipUp();
+            } else if (key == KeyEvent.VK_A) {
+                mapPanel.moveshipLeft();
+            } else if (key == KeyEvent.VK_S) {
+                mapPanel.moveshipDown();
+            } else if (key == KeyEvent.VK_D) {
+                mapPanel.moveshipRight();
+            } else if (key == KeyEvent.VK_ENTER) {
+                int currentObject = 1;
+                mapPanel.addObject(currentObject);
+            }
+        } else {
+            if (enemyMap != null) {
+                if (key == KeyEvent.VK_W) {
+                    enemyMap.moveEnemyUp();
+                } else if (key == KeyEvent.VK_A) {
+                    enemyMap.moveEnemyLeft();
+                } else if (key == KeyEvent.VK_S) {
+                    enemyMap.moveEnemyDown();
+                } else if (key == KeyEvent.VK_D) {
+                    enemyMap.moveEnemyRight();
+                }
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
+}
